@@ -13,7 +13,7 @@ class _MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
-        title: 'High Copy WeChat Project',
+        title: 'Study douyin project',
         debugShowCheckedModeBanner: false,
         translations: Locales(),
         locale: const Locale('zh', 'CN'),

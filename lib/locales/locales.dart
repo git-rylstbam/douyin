@@ -17,7 +17,19 @@ class Locales extends Translations {
         'en_US': _buildUSTranslations(),
       };
 
-  Map<String, String> _buildCNTranslations() => {};
+  Map<String, String> _buildCNTranslations() => {
+        'initial': '首页',
+        'shop': '商城',
+        'publish': '发布',
+        'message': '消息',
+        'individual': '我',
+      };
 
-  Map<String, String> _buildUSTranslations() => {};
+  Map<String, String> _buildUSTranslations() => {
+        'initial': 'Initial',
+        'shop': 'Shop',
+        'publish': 'Publish',
+        'message': 'Message',
+        'individual': 'Individual',
+      };
 }
