@@ -21,6 +21,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   HomeTabEnum? _selectTab = HomeTabEnum.initial;
 
+  final _controller = PageController();
+
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: switch (_selectTab) {
-                HomeTabEnum.initial => const InitialPage(),
+                HomeTabEnum.initial => InitialPage(controller: _controller),
                 HomeTabEnum.shop => const ShopPage(),
                 HomeTabEnum.publish => const PublishPage(),
                 HomeTabEnum.message => const MessagePage(),
@@ -56,6 +58,13 @@ class _HomePageState extends State<HomePage> {
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
           onTap: () => setState(() => _selectTab = tab),
+          onDoubleTap: _selectTab == HomeTabEnum.initial
+              ? () => _controller.animateToPage(
+                    0,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  )
+              : null,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: switch (tab) {

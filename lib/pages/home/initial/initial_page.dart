@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'model/model.dart';
+
 /// CreateDate: 2025/1/10 16:24
 /// Author: Lee
 /// Description:
 
 class InitialPage extends StatefulWidget {
-  const InitialPage({super.key});
+  const InitialPage({super.key, required this.controller});
+
+  final PageController controller;
 
   @override
   State<InitialPage> createState() => _InitialPageState();
@@ -15,19 +19,27 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.teal,
-        body: PageView.builder(
-          scrollDirection: Axis.vertical,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (_, index) => _InitialPageChild(index: index),
-          itemCount: 100,
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            PageView.builder(
+              controller: widget.controller,
+              scrollDirection: Axis.vertical,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (_, index) => _InitialPageChild(
+                product: products[index],
+              ),
+              itemCount: products.length,
+            ),
+          ],
         ),
       );
 }
 
 class _InitialPageChild extends StatefulWidget {
-  const _InitialPageChild({required this.index});
+  const _InitialPageChild({required this.product});
 
-  final int index;
+  final ProductEntity product;
 
   @override
   State<_InitialPageChild> createState() => _InitialPageChildState();
@@ -41,11 +53,12 @@ class _InitialPageChildState extends State<_InitialPageChild>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Center(
-      child: Text(
-        '${widget.index}',
-        style: const TextStyle(fontSize: 200.0, color: Colors.white),
-      ),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        if (widget.product.path != null)
+          Image.asset(widget.product.path!, fit: BoxFit.fill),
+      ],
     );
   }
 }
