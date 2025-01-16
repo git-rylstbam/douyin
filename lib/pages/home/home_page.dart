@@ -58,15 +58,46 @@ class _HomePageState extends State<HomePage> {
           onTap: () => setState(() => _selectTab = tab),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Text(
-              tab.name.tr,
-              style: TextStyle(
-                fontSize: 14.0,
-                color: _selectTab == HomeTabEnum.initial
-                    ? Colors.white
-                    : const Color(0xFF66676F),
-              ),
-            ),
+            child: switch (tab) {
+              HomeTabEnum.initial => Row(
+                  spacing: 4.0,
+                  children: [
+                    Text(
+                      tab.name.tr,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: _selectTab == HomeTabEnum.initial
+                            ? Colors.white
+                            : const Color(0xFF66676F),
+                      ),
+                    ),
+                    if (_selectTab == HomeTabEnum.initial)
+                      Icon(
+                        Icons.multiple_stop,
+                        size: 10.0,
+                        color: _selectTab == HomeTabEnum.initial
+                            ? Colors.white
+                            : const Color(0xFF66676F),
+                      ),
+                  ],
+                ),
+              HomeTabEnum.publish => Icon(
+                  Icons.add_circle_outline,
+                  size: 20.0,
+                  color: _selectTab == HomeTabEnum.initial
+                      ? Colors.white
+                      : const Color(0xFF66676F),
+                ),
+              _ => Text(
+                  tab.name.tr,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: _selectTab == HomeTabEnum.initial
+                        ? Colors.white
+                        : const Color(0xFF66676F),
+                  ),
+                ),
+            },
           ),
         ),
       );

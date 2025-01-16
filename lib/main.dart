@@ -5,11 +5,24 @@ import 'package:get/get.dart';
 
 import 'locales/locales.dart';
 import 'routes.dart';
+import 'theme.dart';
 
-void main() => runApp(const _MyApp());
+void main() => runApp(const MyApp());
 
-class _MyApp extends StatelessWidget {
-  const _MyApp();
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  static MyAppState of(BuildContext context) =>
+      context.findAncestorStateOfType<MyAppState>()!;
+
+  @override
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  final _controller = ThemeController();
+
+  void changeFont(String font) => setState(() => _controller.font = font);
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
@@ -18,6 +31,7 @@ class _MyApp extends StatelessWidget {
         translations: Locales(),
         locale: const Locale('zh', 'CN'),
         fallbackLocale: const Locale('zh', 'CN'),
+        theme: _controller.light,
         scrollBehavior: _MyScrollBehavior(),
         initialRoute: Routes.home,
         getPages: Routes.routes,

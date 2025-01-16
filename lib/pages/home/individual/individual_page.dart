@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../routes.dart';
 
 /// CreateDate: 2025/1/10 16:45
 /// Author: Lee
@@ -13,8 +16,15 @@ class IndividualPage extends StatefulWidget {
 
 class _IndividualPageState extends State<IndividualPage> {
   @override
-  Widget build(BuildContext context) => const Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
-        body: Center(child: Text('Individual Page')),
+        body: ListView(
+          children: [
+            ListTile(
+              title: Text('change_font'.tr),
+              onTap: () => Get.toNamed(Routes.change_font),
+            ),
+          ],
+        ),
       );
 }

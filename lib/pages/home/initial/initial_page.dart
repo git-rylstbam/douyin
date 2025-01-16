@@ -42,7 +42,10 @@ class _InitialPageChildState extends State<_InitialPageChild>
   Widget build(BuildContext context) {
     super.build(context);
     return Center(
-      child: Text('${widget.index}'),
+      child: Text(
+        '${widget.index}',
+        style: const TextStyle(fontSize: 200.0, color: Colors.white),
+      ),
     );
   }
 }

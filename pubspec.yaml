@@ -24,3 +24,12 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  fonts:
+    - family: 汉仪篆书繁
+      fonts:
+        - asset: assets/fonts/汉仪篆书繁.ttf
+
+    - family: 思源黑体
+      fonts:
+        - asset: assets/fonts/SourceHanSansSC-ExtraLight-2.otf

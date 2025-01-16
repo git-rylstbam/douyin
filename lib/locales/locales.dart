@@ -23,6 +23,7 @@ class Locales extends Translations {
         'publish': '发布',
         'message': '消息',
         'individual': '我',
+        'change_font': '切换字体',
       };
 
   Map<String, String> _buildUSTranslations() => {
@@ -31,5 +32,6 @@ class Locales extends Translations {
         'publish': 'Publish',
         'message': 'Message',
         'individual': 'Individual',
+        'change_font': 'Change Font',
       };
 }
