@@ -2,12 +2,17 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'locales/locales.dart';
 import 'routes.dart';
 import 'theme.dart';
+import 'utils/storage_util.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  await GetStorage.init(StorageUtil.defaultKey);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
