@@ -47,7 +47,7 @@ class ProductEntity {
   /// 读取出来的数据会是 JSArray 类型，这是 Dart 和 JavaScript 之间的桥接类型。
   /// 要解决这个问题，可以在保存数据之前将 List 转换为 JSON 字符串，在读取数据时再将字符串转
   /// 换回 List。
-  /// 注: 上述只适用于基本类型。
+  /// 注意: 上述只适用于基本类型。
   /// 若是自定义类型，则参考:
   /// 在 flutter web 项目中使用 get_storage 插件时，可能会遇到第二次读取 List<ProductEntity> 返回
   /// 的数据类型为 JSArray 的问题。这是因为 web 环境下的 get_storage 使用了 JavaScript 内置的存

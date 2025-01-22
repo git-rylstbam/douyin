@@ -38,6 +38,11 @@ class Locales extends Translations {
         'like': '点赞',
         'comment': '评论',
         'share': '分享',
+        'add_friend': '添加朋友',
+        'new_guest': '新访客',
+        'douyin_id': '抖音号',
+        'praised': '获赞',
+
       };
 
   Map<String, String> _buildUSTranslations() => {
@@ -61,5 +66,8 @@ class Locales extends Translations {
         'like': 'Like',
         'comment': 'Comment',
         'share': 'Share',
+        'add_friend': 'Add Friend',
+        'new_guest': 'New Guest',
+        'douyin_id': 'Douyin ID',
       };
 }

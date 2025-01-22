@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/dismiss_scroll_bar.dart';
 import 'experience/experience_page.dart';
 import 'model/model.dart';
 
@@ -102,8 +103,7 @@ class _InitialPageState extends State<InitialPage>
         ),
       );
 
-  Widget _buildTopNavigationbar() => ScrollConfiguration(
-        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+  Widget _buildTopNavigationbar() => DismissScrollbar(
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: InitialTopTabEnum.values
