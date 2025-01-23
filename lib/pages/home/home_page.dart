@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../utils/storage_util.dart';
 import 'individual/individual_page.dart';
-import 'individual/test_page.dart';
 import 'initial/initial_page.dart';
 import 'initial/model/model.dart';
 import 'message/message_page.dart';
