@@ -67,7 +67,7 @@ class _ProductionPageState extends State<ProductionPage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       );
 }
