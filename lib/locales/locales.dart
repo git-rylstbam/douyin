@@ -42,7 +42,10 @@ class Locales extends Translations {
         'new_guest': '新访客',
         'douyin_id': '抖音号',
         'praised': '获赞',
-
+        'production': '作品',
+        'love': '喜欢',
+        'daily': '日常',
+        'privacy': '私密',
       };
 
   Map<String, String> _buildUSTranslations() => {
@@ -69,5 +72,10 @@ class Locales extends Translations {
         'add_friend': 'Add Friend',
         'new_guest': 'New Guest',
         'douyin_id': 'Douyin ID',
+        'praised': 'Praised',
+        'production': 'Production',
+        'love': 'Love',
+        'daily': 'Daily',
+        'privacy': 'Privacy',
       };
 }

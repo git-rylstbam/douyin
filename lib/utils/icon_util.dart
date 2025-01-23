@@ -38,6 +38,7 @@ abstract class IconUtil {
   static const icon_037 = '$icon_jpg_path/icon_037.jpg';
   static const icon_038 = '$icon_jpg_path/icon_038.jpg';
   static const icon_039 = '$icon_jpg_path/icon_039.jpg';
+  static const icon_placeholder = '$icon_jpg_path/icon_placeholder.JPG';
 
   static const icon_png_path = 'assets/pngs';
   static const icon_001 = '$icon_png_path/icon_001.png';

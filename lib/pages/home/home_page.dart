@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../utils/storage_util.dart';
 import 'individual/individual_page.dart';
+import 'individual/test_page.dart';
 import 'initial/initial_page.dart';
 import 'initial/model/model.dart';
 import 'message/message_page.dart';
@@ -117,8 +119,8 @@ class _HomePageState extends State<HomePage>
                   ],
                 ),
               HomeTabEnum.publish => Icon(
-                  Icons.add_circle_outline,
-                  size: 20.0,
+                  CupertinoIcons.plus_rectangle,
+                  size: 24.0,
                   color: _selectTab == HomeTabEnum.initial
                       ? Colors.white
                       : const Color(0xFF66676F),

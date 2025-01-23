@@ -6,6 +6,8 @@ import '../../../extensions/list_extensions.dart';
 import '../../../routes.dart';
 import '../../../utils/icon_util.dart';
 import '../../../widgets/dismiss_scroll_bar.dart';
+import 'enums.dart';
+import 'production/production_page.dart';
 
 /// CreateDate: 2025/1/10 16:45
 /// Author: Lee
@@ -21,23 +23,26 @@ class IndividualPage extends StatefulWidget {
 class _IndividualPageState extends State<IndividualPage>
     with SingleTickerProviderStateMixin {
   final _scaleNotifier = ValueNotifier<double>(1.0);
-  final _titleOpacityNotifier = ValueNotifier<double>(1.0);
   final _operateOpacityNotifier = ValueNotifier<double>(1.0);
 
   late final TabController _tabController;
+
+  final _indexNotifier = ValueNotifier<int>(0);
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 6, vsync: this);
+    _tabController
+        .addListener(() => _indexNotifier.value = _tabController.index);
   }
 
   @override
   void dispose() {
     _scaleNotifier.dispose();
-    _titleOpacityNotifier.dispose();
     _operateOpacityNotifier.dispose();
     _tabController.dispose();
+    _indexNotifier.dispose();
     super.dispose();
   }
 
@@ -65,65 +70,62 @@ class _IndividualPageState extends State<IndividualPage>
           }
           return true;
         },
-        child: Stack(
-          children: [
-            DismissScrollbar(
-              child: NestedScrollView(
-                physics: const BouncingScrollPhysics(),
-                headerSliverBuilder: (_, __) => [
-                  _buildIndividualTopbar(),
-                  _buildCenterLine(),
+        child: DismissScrollbar(
+          child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              _buildIndividualTopbar(),
+              _buildCenterLine(),
+              SliverMainAxisGroup(
+                slivers: [
                   SliverPersistentHeader(
                     pinned: true,
                     delegate: _StickyTabbarDelegate(
                       TabBar(
                         controller: _tabController,
                         indicatorColor: Colors.black,
-                        labelColor: Colors.black,
-                        indicatorWeight: 1,
+                        indicatorSize: TabBarIndicatorSize.tab,
                         dividerColor: Colors.transparent,
-                        overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+                        overlayColor: const WidgetStatePropertyAll(
+                          Colors.transparent,
+                        ),
+                        labelColor: Colors.black,
                         unselectedLabelColor: const Color(0xFF72737A),
-                        tabs: const [
-                          Tab(text: '作品'),
-                          Tab(text: '日常'),
-                          Tab(text: '私密'),
-                          Tab(text: '推荐'),
-                          Tab(text: '收藏'),
-                          Tab(text: '喜欢'),
-                        ],
+                        tabs: IndividualTabEnum.values
+                            .map((e) => Tab(text: e.name.tr))
+                            .toList(),
                       ),
                     ),
                   ),
+                  ValueListenableBuilder(
+                    valueListenable: _indexNotifier,
+                    builder: (_, value, __) => switch (value) {
+                      0 => const ProductionPage(),
+                      _ => SliverList.list(children: const []),
+                    },
+                  ),
+                  // SliverList(
+                  //   delegate: SliverChildBuilderDelegate(
+                  //     (_, index) => ListTile(title: Text('Item $index')),
+                  //     childCount: 100,
+                  //   ),
+                  // ),
                 ],
-                body: TabBarView(
-                  controller: _tabController,
-                  children: const [
-                    Text('作品'),
-                    Text('日常'),
-                    Text('私密'),
-                    Text('推荐'),
-                    Text('收藏'),
-                    Text('喜欢'),
-                  ],
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 
   Widget _buildIndividualTopbar() => SliverAppBar(
-        expandedHeight: 200.0,
+        expandedHeight: 100.0,
+        collapsedHeight: 100.0,
         stretch: true,
-        backgroundColor: Colors.transparent,
-        flexibleSpace: Stack(
-          alignment: AlignmentDirectional.bottomStart,
-          children: [
-            _buildIndividualTopBackground(),
-            _buildIndividualInfoLine(),
-          ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(100.0),
+          child: _buildIndividualInfoLine(),
         ),
+        flexibleSpace: _buildIndividualTopBackground(),
       );
 
   Widget _buildCenterLine() => SliverToBoxAdapter(
@@ -326,16 +328,16 @@ class _IndividualPageState extends State<IndividualPage>
               ],
             ),
           ),
-          Container(
-            height: 10.0,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0),
-              ),
-              color: Colors.white,
-            ),
-          ),
+          // Container(
+          //   height: 10.0,
+          //   decoration: const BoxDecoration(
+          //     borderRadius: BorderRadius.only(
+          //       topLeft: Radius.circular(20.0),
+          //       topRight: Radius.circular(20.0),
+          //     ),
+          //     color: Colors.white,
+          //   ),
+          // ),
         ],
       );
 
@@ -488,6 +490,11 @@ class _FunctionButton extends StatelessWidget {
   Widget build(BuildContext context) => Expanded(
         child: InkWell(
           onTap: onPressed,
+          splashColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+          focusColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           child: Column(
             spacing: 10.0,
             mainAxisSize: MainAxisSize.min,
@@ -500,7 +507,7 @@ class _FunctionButton extends StatelessWidget {
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -513,7 +520,10 @@ class _StickyTabbarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar tabbar;
 
   @override
-  Widget build(context, shrinkOffset, overlapsContent) => tabbar;
+  Widget build(context, shrinkOffset, overlapsContent) => ColoredBox(
+        color: Colors.white,
+        child: tabbar,
+      );
 
   @override
   double get maxExtent => tabbar.preferredSize.height;
