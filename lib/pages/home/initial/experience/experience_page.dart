@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../utils/icon_util.dart';
+import '../../../../utils/storage_util.dart';
 import '../enums.dart';
 import '../model/model.dart';
 
@@ -42,7 +43,10 @@ class _ExperiencePageState extends State<ExperiencePage>
       physics: const BouncingScrollPhysics(),
       itemBuilder: (_, index) => _InitialPageChild(
         product: widget.products[index],
-        onSave: () => ProductEntity.save(widget.products),
+        onSave: () => ProductEntity.save(
+          StorageKeyEnum.product,
+          widget.products,
+        ),
       ),
       itemCount: widget.products.length,
     );

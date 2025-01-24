@@ -6,8 +6,12 @@ import '../../../extensions/list_extensions.dart';
 import '../../../routes.dart';
 import '../../../utils/icon_util.dart';
 import '../../../widgets/dismiss_scroll_bar.dart';
+import 'collect/collect_page.dart';
 import 'enums.dart';
+import 'like/like_page.dart';
+import 'privacy/privacy_page.dart';
 import 'production/production_page.dart';
+import 'recommend/recommend_page.dart';
 
 /// CreateDate: 2025/1/10 16:45
 /// Author: Lee
@@ -22,27 +26,26 @@ class IndividualPage extends StatefulWidget {
 
 class _IndividualPageState extends State<IndividualPage>
     with SingleTickerProviderStateMixin {
-  final _scaleNotifier = ValueNotifier<double>(1.0);
-  final _operateOpacityNotifier = ValueNotifier<double>(1.0);
-
   late final TabController _tabController;
 
-  final _indexNotifier = ValueNotifier<int>(0);
+  final _tabIndexNotifier = ValueNotifier<int>(0);
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 6, vsync: this);
-    _tabController
-        .addListener(() => _indexNotifier.value = _tabController.index);
+    _tabController = TabController(
+      length: IndividualTabEnum.values.length,
+      vsync: this,
+    );
+    _tabController.addListener(
+      () => _tabIndexNotifier.value = _tabController.index,
+    );
   }
 
   @override
   void dispose() {
-    _scaleNotifier.dispose();
-    _operateOpacityNotifier.dispose();
     _tabController.dispose();
-    _indexNotifier.dispose();
+    _tabIndexNotifier.dispose();
     super.dispose();
   }
 
@@ -61,86 +64,73 @@ class _IndividualPageState extends State<IndividualPage>
         ),
       );
 
-  Widget _buildIndividualList() => NotificationListener<ScrollNotification>(
-        onNotification: (value) {
-          if (value.metrics.axisDirection == AxisDirection.down) {
-            final offset = value.metrics.pixels;
-            _scaleNotifier.value = (1.0 - offset / 200).clamp(1.0, 3.0);
-            _operateOpacityNotifier.value = offset > 100.0 ? .0 : 1.0;
-          }
-          return true;
-        },
-        child: DismissScrollbar(
-          child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              _buildIndividualTopbar(),
-              _buildCenterLine(),
-              SliverMainAxisGroup(
-                slivers: [
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _StickyTabbarDelegate(
-                      TabBar(
-                        controller: _tabController,
-                        indicatorColor: Colors.black,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        dividerColor: Colors.transparent,
-                        overlayColor: const WidgetStatePropertyAll(
-                          Colors.transparent,
-                        ),
-                        labelColor: Colors.black,
-                        unselectedLabelColor: const Color(0xFF72737A),
-                        tabs: IndividualTabEnum.values
-                            .map((e) => Tab(text: e.name.tr))
-                            .toList(),
-                      ),
-                    ),
-                  ),
-                  ValueListenableBuilder(
-                    valueListenable: _indexNotifier,
-                    builder: (_, value, __) => switch (value) {
-                      0 => const ProductionPage(),
-                      _ => SliverList.list(children: const []),
-                    },
-                  ),
-                  // SliverList(
-                  //   delegate: SliverChildBuilderDelegate(
-                  //     (_, index) => ListTile(title: Text('Item $index')),
-                  //     childCount: 100,
-                  //   ),
-                  // ),
-                ],
+  Widget _buildIndividualList() => DismissScrollbar(
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 100.0,
+              collapsedHeight: 100.0,
+              stretch: true,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(100.0),
+                child: _buildIndividualInfoLine(),
               ),
-            ],
-          ),
-        ),
-      );
-
-  Widget _buildIndividualTopbar() => SliverAppBar(
-        expandedHeight: 100.0,
-        collapsedHeight: 100.0,
-        stretch: true,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(100.0),
-          child: _buildIndividualInfoLine(),
-        ),
-        flexibleSpace: _buildIndividualTopBackground(),
-      );
-
-  Widget _buildCenterLine() => SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            spacing: 20.0,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildCenterLine01(),
-              _buildCenterLine02(),
-              _buildCenterLine03(),
-            ],
-          ),
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.asset(
+                  IconUtil.icon_019,
+                  height: 200.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  spacing: 20.0,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildCenterLine01(),
+                    _buildCenterLine02(),
+                    _buildCenterLine03(),
+                  ],
+                ),
+              ),
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _StickyTabbarDelegate(
+                TabBar(
+                  controller: _tabController,
+                  indicatorColor: Colors.black,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  dividerColor: Colors.transparent,
+                  overlayColor: const WidgetStatePropertyAll(
+                    Colors.transparent,
+                  ),
+                  labelColor: Colors.black,
+                  unselectedLabelColor: const Color(0xFF72737A),
+                  tabs: IndividualTabEnum.values
+                      .map((e) => Tab(text: e.name.tr))
+                      .toList(),
+                ),
+              ),
+            ),
+            ValueListenableBuilder(
+              valueListenable: _tabIndexNotifier,
+              builder: (_, value, __) => switch (value) {
+                0 => const ProductionPage(),
+                1 => const SliverToBoxAdapter(child: SizedBox.shrink()),
+                2 => const PrivacyPage(),
+                3 => const RecommendPage(),
+                4 => const CollectPage(),
+                5 => const LikePage(),
+                _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
+                },
+            ),
+          ],
         ),
       );
 
@@ -263,21 +253,6 @@ class _IndividualPageState extends State<IndividualPage>
         ],
       );
 
-  Widget _buildIndividualTopBackground() => FlexibleSpaceBar(
-        background: ValueListenableBuilder(
-          valueListenable: _scaleNotifier,
-          builder: (_, value, __) => Transform.scale(
-            scale: value,
-            child: Image.asset(
-              IconUtil.icon_019,
-              width: double.infinity,
-              height: 200.0,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      );
-
   Widget _buildIndividualInfoLine() => Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -328,16 +303,6 @@ class _IndividualPageState extends State<IndividualPage>
               ],
             ),
           ),
-          // Container(
-          //   height: 10.0,
-          //   decoration: const BoxDecoration(
-          //     borderRadius: BorderRadius.only(
-          //       topLeft: Radius.circular(20.0),
-          //       topRight: Radius.circular(20.0),
-          //     ),
-          //     color: Colors.white,
-          //   ),
-          // ),
         ],
       );
 
@@ -369,44 +334,30 @@ class _IndividualPageState extends State<IndividualPage>
         ].mapWithSeparator((e) => const SizedBox(width: 10.0)),
       );
 
-  Widget _buildAddFriendButton() => ValueListenableBuilder(
-        valueListenable: _operateOpacityNotifier,
-        builder: (_, value, __) => AnimatedOpacity(
-          opacity: value,
-          duration: const Duration(milliseconds: 500),
-          child: TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.person_add_alt_outlined,
-              color: Colors.white,
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.black.withAlpha(50),
-              foregroundColor: Colors.white,
-            ),
-            label: Text('add_friend'.tr),
-          ),
+  Widget _buildAddFriendButton() => TextButton.icon(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.person_add_alt_outlined,
+          color: Colors.white,
         ),
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.black.withAlpha(50),
+          foregroundColor: Colors.white,
+        ),
+        label: Text('add_friend'.tr),
       );
 
-  Widget _buildNewGuestButton() => ValueListenableBuilder(
-        valueListenable: _operateOpacityNotifier,
-        builder: (_, value, __) => AnimatedOpacity(
-          opacity: value,
-          duration: const Duration(milliseconds: 500),
-          child: TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.people_outline,
-              color: Colors.white,
-            ),
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.black.withAlpha(50),
-              foregroundColor: Colors.white,
-            ),
-            label: Text('${'new_guest'.tr} 99+'),
-          ),
+  Widget _buildNewGuestButton() => TextButton.icon(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.people_outline,
+          color: Colors.white,
         ),
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.black.withAlpha(50),
+          foregroundColor: Colors.white,
+        ),
+        label: Text('${'new_guest'.tr} 99+'),
       );
 
   Widget _buildIndividualAvatar() => Container(

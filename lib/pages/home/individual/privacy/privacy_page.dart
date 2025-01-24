@@ -1,32 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/storage_util.dart';
 import '../../initial/model/model.dart';
 import '../widgets/individual_tab_child.dart';
 
-/// CreateDate: 2025/1/22 13:51
+/// CreateDate: 2025/1/23 16:37
 /// Author: Lee
 /// Description:
 
-class ProductionPage extends StatefulWidget {
-  const ProductionPage({super.key});
+class PrivacyPage extends StatefulWidget {
+  const PrivacyPage({super.key});
 
   @override
-  State<ProductionPage> createState() => _ProductionPageState();
+  State<PrivacyPage> createState() => _PrivacyPageState();
 }
 
-class _ProductionPageState extends State<ProductionPage> {
-  late final List<ProductEntity> _productions;
+class _PrivacyPageState extends State<PrivacyPage> {
+  late final List<ProductEntity> _privacies;
 
   @override
   void initState() {
     super.initState();
-    if (!StorageUtil.has(StorageKeyEnum.production)) {
+    if (!StorageUtil.has(StorageKeyEnum.privacy)) {
       final value = ProductEntity.read(StorageKeyEnum.product);
-      ProductEntity.save(StorageKeyEnum.production, value);
+      value.shuffle();
+      ProductEntity.save(StorageKeyEnum.privacy, value);
     }
-    _productions = ProductEntity.read(StorageKeyEnum.production);
+    _privacies = ProductEntity.read(StorageKeyEnum.privacy);
   }
 
   @override
@@ -38,8 +38,8 @@ class _ProductionPageState extends State<ProductionPage> {
           mainAxisExtent: 240.0,
         ),
         itemBuilder: (_, index) => IndividualTabChild(
-          product: _productions[index],
+          product: _privacies[index],
         ),
-        itemCount: _productions.length,
+        itemCount: _privacies.length,
       );
 }

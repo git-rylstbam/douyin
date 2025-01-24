@@ -37,9 +37,6 @@ class ProductEntity {
 
   Map<String, dynamic> toJson() => _$ProductEntityToJson(this);
 
-  @override
-  String toString() => jsonEncode(this);
-
   /// 在 flutter web 项目中使用 get_storage 插件时，可能会遇到第二次读取 List 类型数据时返回的数
   /// 据类型为 JSArray 的问题。这是因为 get_storage 在 web 上使用了 window.localStorage，而
   /// localStorage 只能存储字符串。
@@ -57,19 +54,23 @@ class ProductEntity {
   /// 符串反序列化为 ProductEntity 对象。使用 jsonEncode 和 jsonDecode 函数来处理 JSON 序列化和
   /// 反序列化。这样，可以正确地在 web 环境下使用 get_straoge 插件来存储和读取自定义对象列表
   /// 。
-  static Future<void> save(List<ProductEntity> value) => StorageUtil.write(
-        StorageKeyEnum.initial,
+  static Future<void> save(StorageKeyEnum key, List<ProductEntity> value) =>
+      StorageUtil.write(
+        key,
         kIsWeb ? jsonEncode(value.map((e) => e.toJson()).toList()) : value,
       );
 
-  static List<ProductEntity> read() {
-    final value = StorageUtil.read(StorageKeyEnum.initial);
+  static List<ProductEntity> read(StorageKeyEnum key) {
+    final value = StorageUtil.read(key);
     return kIsWeb
         ? (jsonDecode(value) as List)
             .map((e) => ProductEntity.fromJson(e))
             .toList()
         : value;
   }
+
+  @override
+  String toString() => jsonEncode(this);
 }
 
 final List<ProductEntity> products = [
@@ -121,4 +122,188 @@ final List<ProductEntity> products = [
   ProductEntity(path: IconUtil.icon_046),
   ProductEntity(path: IconUtil.icon_047),
   ProductEntity(path: IconUtil.icon_048),
+];
+
+@JsonSerializable()
+class FriendEntity {
+  const FriendEntity({this.name, this.avatar, this.time, this.message});
+
+  factory FriendEntity.fromJson(Map<String, dynamic> json) =>
+      _$FriendEntityFromJson(json);
+
+  final String? name;
+  final String? avatar;
+  final String? time;
+  final String? message;
+
+  Map<String, dynamic> toJson() => _$FriendEntityToJson(this);
+
+  @override
+  String toString() => jsonEncode(this);
+}
+
+const List<FriendEntity> friends = [
+  FriendEntity(
+    name: '刘亦菲',
+    avatar: IconUtil.icon_001,
+    time: '2024/01/22',
+    message: '我要嫁给过儿为妻',
+  ),
+  FriendEntity(
+    name: '赵丽颖',
+    avatar: IconUtil.icon_002,
+    time: '2024/02/10',
+    message: '世上安得双全法，不负如来不负卿',
+  ),
+  FriendEntity(
+    name: '白鹿',
+    avatar: IconUtil.icon_003,
+    time: '2024/03/09',
+    message: '啊~~~~~~~~~~~~~~~~~~~~~~~~',
+  ),
+  FriendEntity(
+    name: '赵露思',
+    avatar: IconUtil.icon_004,
+    time: '2024/04/14',
+    message: '不知道演过啥',
+  ),
+  FriendEntity(
+    name: '刘浩存',
+    avatar: IconUtil.icon_005,
+    time: '2024/05/09',
+    message: '我希望你能活着看到黎明的到来',
+  ),
+  FriendEntity(
+    name: '杨幂',
+    avatar: IconUtil.icon_006,
+    time: '2024/06/27',
+    message: '我才是那个豪门',
+  ),
+  FriendEntity(
+    name: '刘诗诗',
+    avatar: IconUtil.icon_007,
+    time: '2024/07/12',
+    message: '没有那把剑，我照样可以歼灭敌军',
+  ),
+  FriendEntity(
+    name: '唐嫣',
+    avatar: IconUtil.icon_008,
+    time: '2024/08/08',
+    message: '我们这里是酒吧',
+  ),
+  FriendEntity(
+    name: '李一桐',
+    avatar: IconUtil.icon_009,
+    time: '2024/09/20',
+    message: '我总觉得他写的故事是真的',
+  ),
+  FriendEntity(
+    name: '李沁',
+    avatar: IconUtil.icon_010,
+    time: '2024/10/01',
+    message: '你认不认识五竹？',
+  ),
+  FriendEntity(
+    name: '黎姿',
+    avatar: IconUtil.icon_011,
+    time: '2024/11/04',
+    message: '无忌师兄，我是周芷若',
+  ),
+  FriendEntity(
+    name: '邱意浓',
+    avatar: IconUtil.icon_012,
+    time: '2024/12/05',
+    message: '看你开那辆破车，能不能追上我',
+  ),
+  FriendEntity(
+    name: '袁洁莹',
+    avatar: IconUtil.icon_013,
+    time: '2025/01/22',
+    message: '我命由我不由天！',
+  ),
+  FriendEntity(
+    name: '张曼玉',
+    avatar: IconUtil.icon_014,
+    time: '2025/02/10',
+    message: '老娘是龙门客栈老板娘金镶玉',
+  ),
+  FriendEntity(
+    name: '朱茵',
+    avatar: IconUtil.icon_015,
+    time: '2025/03/09',
+    message: '那这串手链你是在哪里买的？',
+  ),
+  FriendEntity(
+    name: '张国立',
+    avatar: IconUtil.icon_016,
+    time: '2025/04/14',
+    message: '和珅是大清国第一大贪官！',
+  ),
+  FriendEntity(
+    name: '金士杰',
+    avatar: IconUtil.icon_017,
+    time: '2025/05/09',
+    message: '今年分红一千四百万两零六百零五钱！',
+  ),
+  FriendEntity(
+    name: '黎耀祥',
+    avatar: IconUtil.icon_018,
+    time: '2025/06/27',
+    message: '未来三年之内我要连拿三届金像奖影帝！',
+  ),
+  FriendEntity(
+    name: '张达明',
+    avatar: IconUtil.icon_019,
+    time: '2025/07/12',
+    message: '那你练了没有啊？',
+  ),
+  FriendEntity(
+    name: '周星驰',
+    avatar: IconUtil.icon_020,
+    time: '2025/08/08',
+    message: '谁叫你剪这么漂亮的？哪个叫你剪这么漂亮的？！',
+  ),
+  FriendEntity(
+    name: '周润发',
+    avatar: IconUtil.icon_021,
+    time: '2025/09/20',
+    message: '我只是要别人知道，我失去的我一定要拿回来！',
+  ),
+  FriendEntity(
+    name: '梁朝伟',
+    avatar: IconUtil.icon_022,
+    time: '2025/10/01',
+    message: '什么意思，你上来晒太阳的啊！？',
+  ),
+  FriendEntity(
+    name: '郭富城',
+    avatar: IconUtil.icon_023,
+    time: '2025/11/04',
+    message: '丘吉尔说过: 任何战争都是不必要的',
+  ),
+  FriendEntity(
+    name: '李连杰',
+    avatar: IconUtil.icon_024,
+    time: '2025/12/05',
+    message: '记住，战场上只能有一个头儿！',
+  ),
+  FriendEntity(name: '李兰迪', avatar: IconUtil.icon_025, time: '2024/01/22'),
+  FriendEntity(
+    name: '关晓彤',
+    avatar: IconUtil.icon_026,
+    time: '2024/01/22',
+    message: '落地请开手机！',
+  ),
+  FriendEntity(
+    name: '张卫健',
+    avatar: IconUtil.icon_027,
+    time: '2024/01/22',
+    message: '凉风有信，秋月无边！',
+  ),
+  FriendEntity(
+    name: '陈小春',
+    avatar: IconUtil.icon_028,
+    time: '2024/01/22',
+    message: '你好，我叫山鸡，鸡巴的鸡',
+  ),
 ];

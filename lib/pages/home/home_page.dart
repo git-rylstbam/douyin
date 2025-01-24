@@ -29,16 +29,14 @@ class _HomePageState extends State<HomePage>
 
   List<ProductEntity> _products = [];
 
-  bool get _hasInitialKey => StorageUtil.has(StorageKeyEnum.initial);
-
   @override
   void initState() {
     super.initState();
-    if (!_hasInitialKey) {
+    if (!StorageUtil.has(StorageKeyEnum.product)) {
       products.shuffle();
-      ProductEntity.save(products);
+      ProductEntity.save(StorageKeyEnum.product, products);
     }
-    _products = ProductEntity.read();
+    _products = ProductEntity.read(StorageKeyEnum.product);
   }
 
   @override

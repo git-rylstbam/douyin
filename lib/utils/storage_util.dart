@@ -4,7 +4,15 @@ import 'package:get_storage/get_storage.dart';
 /// Author: Lee
 /// Description:
 
-enum StorageKeyEnum { initial, font }
+enum StorageKeyEnum {
+  product,
+  production,
+  privacy,
+  recommend,
+  like,
+  collect,
+  font,
+}
 
 class StorageUtil {
   static const defaultKey = 'douyin';

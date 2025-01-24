@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/storage_util.dart';
 import '../../../widgets/dismiss_scroll_bar.dart';
 import 'experience/experience_page.dart';
 import 'model/model.dart';
@@ -56,7 +57,7 @@ class _InitialPageState extends State<InitialPage>
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() => widget.products.shuffle());
-          ProductEntity.save(widget.products);
+          ProductEntity.save(StorageKeyEnum.product, widget.products);
         },
         shape: const CircleBorder(),
         backgroundColor: Colors.teal,

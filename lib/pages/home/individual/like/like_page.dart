@@ -1,32 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/storage_util.dart';
 import '../../initial/model/model.dart';
 import '../widgets/individual_tab_child.dart';
 
-/// CreateDate: 2025/1/22 13:51
+/// CreateDate: 2025/1/23 16:43
 /// Author: Lee
 /// Description:
 
-class ProductionPage extends StatefulWidget {
-  const ProductionPage({super.key});
+class LikePage extends StatefulWidget {
+  const LikePage({super.key});
 
   @override
-  State<ProductionPage> createState() => _ProductionPageState();
+  State<LikePage> createState() => _LikePageState();
 }
 
-class _ProductionPageState extends State<ProductionPage> {
-  late final List<ProductEntity> _productions;
+class _LikePageState extends State<LikePage> {
+  late final List<ProductEntity> _likes;
 
   @override
   void initState() {
     super.initState();
-    if (!StorageUtil.has(StorageKeyEnum.production)) {
+    if (!StorageUtil.has(StorageKeyEnum.like)) {
       final value = ProductEntity.read(StorageKeyEnum.product);
-      ProductEntity.save(StorageKeyEnum.production, value);
+      value.shuffle();
+      ProductEntity.save(StorageKeyEnum.like, value);
     }
-    _productions = ProductEntity.read(StorageKeyEnum.production);
+    _likes = ProductEntity.read(StorageKeyEnum.like);
   }
 
   @override
@@ -38,8 +38,8 @@ class _ProductionPageState extends State<ProductionPage> {
           mainAxisExtent: 240.0,
         ),
         itemBuilder: (_, index) => IndividualTabChild(
-          product: _productions[index],
+          product: _likes[index],
         ),
-        itemCount: _productions.length,
+        itemCount: _likes.length,
       );
 }
