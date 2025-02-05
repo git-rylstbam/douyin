@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../utils/storage_util.dart';
 import '../../../widgets/dismiss_scroll_bar.dart';
+import '../../../widgets/start_drawer.dart';
 import 'experience/experience_page.dart';
 import 'model/model.dart';
 
@@ -30,6 +31,8 @@ class _InitialPageState extends State<InitialPage>
     with AutomaticKeepAliveClientMixin {
   final _topTabNotifier = ValueNotifier(InitialTopTabEnum.recommend);
 
+  final _drawerKey = GlobalKey<ScaffoldState>();
+
   @override
   bool get wantKeepAlive => true;
 
@@ -43,7 +46,9 @@ class _InitialPageState extends State<InitialPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
+      key: _drawerKey,
       backgroundColor: Colors.teal,
+      drawer: const StartDrawer(),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -90,7 +95,7 @@ class _InitialPageState extends State<InitialPage>
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => _drawerKey.currentState!.openDrawer(),
                   icon: const Icon(Icons.sort, color: Colors.white),
                 ),
                 Expanded(child: _buildTopNavigationbar()),

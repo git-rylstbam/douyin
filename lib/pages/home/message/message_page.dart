@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../extensions/list_extensions.dart';
 import '../../../utils/icon_util.dart';
 import '../../../widgets/dismiss_scroll_bar.dart';
+import '../../../widgets/start_drawer.dart';
 import '../initial/model/model.dart';
 import 'enum.dart';
 
@@ -21,6 +22,8 @@ class MessagePage extends StatefulWidget {
 
 class _MessagePageState extends State<MessagePage>
     with AutomaticKeepAliveClientMixin {
+  final _drawerKey = GlobalKey<ScaffoldState>();
+
   @override
   bool get wantKeepAlive => true;
 
@@ -28,9 +31,17 @@ class _MessagePageState extends State<MessagePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
+      key: _drawerKey,
       backgroundColor: Colors.white,
+      drawer: const StartDrawer(),
       appBar: AppBar(
-        leading: const Icon(Icons.sort, size: 24.0, color: Colors.black),
+        leading: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => _drawerKey.currentState!.openDrawer(),
+            child: const Icon(Icons.sort, size: 24.0, color: Colors.black),
+          ),
+        ),
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
         title: Text(
