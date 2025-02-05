@@ -9,6 +9,7 @@ import '../../../../utils/icon_util.dart';
 import '../../../../utils/storage_util.dart';
 import '../enums.dart';
 import '../model/model.dart';
+import 'widgets/bottom_sheet.dart';
 
 /// CreateDate: 2025/1/17 14:38
 /// Author: Lee
@@ -123,7 +124,10 @@ class _InitialPageChildState extends State<_InitialPageChild>
       fit: StackFit.expand,
       children: [
         if (widget.product.path != null)
-          Image.asset(widget.product.path!, fit: BoxFit.fill),
+          GestureDetector(
+            onLongPress: _showBottomSheet,
+            child: Image.asset(widget.product.path!, fit: BoxFit.fill),
+          ),
         Align(
           alignment: Alignment.bottomRight,
           child: Stack(
@@ -189,8 +193,10 @@ class _InitialPageChildState extends State<_InitialPageChild>
       );
 
   Widget _buildCollectButton() => ListenableBuilder(
-        listenable:
-            Listenable.merge([_collectCountNotifier, _isCollectNotifier]),
+        listenable: Listenable.merge([
+          _collectCountNotifier,
+          _isCollectNotifier,
+        ]),
         builder: (_, __) => _OperateButton(
           icon: CupertinoIcons.star_fill,
           title: _collectCountNotifier.value == 0
@@ -235,6 +241,24 @@ class _InitialPageChildState extends State<_InitialPageChild>
               fit: BoxFit.cover,
             ),
           ),
+        ),
+      );
+
+  void _showBottomSheet() => showModalBottomSheet(
+        context: context,
+        barrierColor: Colors.transparent,
+        isScrollControlled: true,
+        builder: (_) => Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 2 / 3,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+            color: Color(0xFFF3F3F4),
+          ),
+          child: const ExperienceBottomSheet(),
         ),
       );
 }
