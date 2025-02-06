@@ -29,7 +29,10 @@ class ThemeController {
   ThemeData get light => ThemeData(
         fontFamily: font ?? '三极素纤简体',
         scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+        ),
         iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
             hoverColor: Colors.transparent,

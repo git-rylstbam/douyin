@@ -10,14 +10,14 @@ import '../../model/model.dart';
 /// Author: Lee
 /// Description:
 
-class ExperienceBottomSheet extends StatefulWidget {
-  const ExperienceBottomSheet({super.key});
+class RecommendBottomSheet extends StatefulWidget {
+  const RecommendBottomSheet({super.key});
 
   @override
-  State<ExperienceBottomSheet> createState() => _ExperienceBottomSheetState();
+  State<RecommendBottomSheet> createState() => _RecommendBottomSheetState();
 }
 
-class _ExperienceBottomSheetState extends State<ExperienceBottomSheet> {
+class _RecommendBottomSheetState extends State<RecommendBottomSheet> {
   final _barrageSwitchNotifier = ValueNotifier<bool>(false);
   final _backAudioSwitchNotifier = ValueNotifier<bool>(false);
   final _backWinPlaySwitchNotifier = ValueNotifier<bool>(false);

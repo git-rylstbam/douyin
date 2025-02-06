@@ -31,10 +31,14 @@ Map<String, dynamic> _$ProductEntityToJson(ProductEntity instance) =>
 FriendEntity _$FriendEntityFromJson(Map<String, dynamic> json) => FriendEntity(
       name: json['name'] as String?,
       avatar: json['avatar'] as String?,
+      time: json['time'] as String?,
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$FriendEntityToJson(FriendEntity instance) =>
     <String, dynamic>{
       'name': instance.name,
       'avatar': instance.avatar,
+      'time': instance.time,
+      'message': instance.message,
     };

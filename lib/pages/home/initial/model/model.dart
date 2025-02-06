@@ -40,7 +40,7 @@ class ProductEntity {
   /// 在 flutter web 项目中使用 get_storage 插件时，可能会遇到第二次读取 List 类型数据时返回的数
   /// 据类型为 JSArray 的问题。这是因为 get_storage 在 web 上使用了 window.localStorage，而
   /// localStorage 只能存储字符串。
-  /// 当你尝试直接保存和读取 List 类型的数据时，数据会呗转换成 JSON 字符串。而在 web 环境下，
+  /// 当你尝试直接保存和读取 List 类型的数据时，数据会被转换成 JSON 字符串。而在 web 环境下，
   /// 读取出来的数据会是 JSArray 类型，这是 Dart 和 JavaScript 之间的桥接类型。
   /// 要解决这个问题，可以在保存数据之前将 List 转换为 JSON 字符串，在读取数据时再将字符串转
   /// 换回 List。

@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../extensions/list_extensions.dart';
+import '../routes.dart';
 import '../utils/icon_util.dart';
 import 'dismiss_scroll_bar.dart';
+import 'just_tap.dart';
 
 /// CreateDate: 2025/2/5 14:57
 /// Author: Lee
@@ -75,7 +78,13 @@ class _BasicFunctionPageState extends State<_BasicFunctionPage> {
           Row(
             spacing: 10.0,
             children: [
-              _buildHeaderTrailing(title: '设置', icon: Icons.settings_outlined),
+              JustTap(
+                onPressed: () => Get.toNamed(Routes.setting),
+                child: _buildHeaderTrailing(
+                  title: '设置',
+                  icon: Icons.settings_outlined,
+                ),
+              ),
               _buildHeaderTrailing(
                 title: '扫一扫',
                 icon: CupertinoIcons.viewfinder,

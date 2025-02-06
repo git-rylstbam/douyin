@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/storage_util.dart';
 import '../../../widgets/dismiss_scroll_bar.dart';
 import '../../../widgets/start_drawer.dart';
 import 'experience/experience_page.dart';
 import 'model/model.dart';
+import 'recommend/recommend_page.dart';
 
 /// CreateDate: 2025/1/10 16:24
 /// Author: Lee
@@ -59,24 +59,14 @@ class _InitialPageState extends State<InitialPage>
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() => widget.products.shuffle());
-          ProductEntity.save(StorageKeyEnum.product, widget.products);
-        },
-        shape: const CircleBorder(),
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.reorder),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 
   Widget _buildInitialPage() => ValueListenableBuilder(
         valueListenable: _topTabNotifier,
         builder: (_, value, __) => switch (value) {
-          InitialTopTabEnum.recommend => ExperiencePage(
+          InitialTopTabEnum.experience => const ExperiencePage(),
+          InitialTopTabEnum.recommend => RecommendPage(
               controller: widget.controller,
               products: widget.products,
             ),
@@ -142,8 +132,7 @@ enum InitialTopTabEnum {
   peking,
   attention,
   choiceness,
-  recommend,
-  collect_cards;
+  recommend;
 
   @override
   String toString() => name.tr;
