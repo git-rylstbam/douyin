@@ -43,3 +43,52 @@ flutter:
     - family: 思源黑体
       fonts:
         - asset: assets/fonts/SourceHanSansSC-ExtraLight-2.otf
+
+    - family: 青鸟华光繁仿宋
+      fonts:
+        - asset: assets/fonts/QingNiaoHuaGuangFanFangSong-2.ttf
+
+    - family: 鼎猎宋刻体
+      fonts:
+        - asset: assets/fonts/dingliesongtypeface20241217-2.ttf
+
+    - family: 鼎猎伙伴体
+      fonts:
+        - asset: assets/fonts/dingliehuobanfont20241217-2.ttf
+
+    - family: 周字方体
+      fonts:
+        - asset: assets/fonts/ZhouZiFangTi241010-TTF-2.ttf
+
+    - family: 鼎猎珠海体
+      fonts:
+        - asset: assets/fonts/dingliezhuhaifont-20240831GengXinBan)-2.ttf
+
+    - family: 周字宋体
+      fonts:
+        - asset: assets/fonts/ZhouZiSongTi7000Zi-2.otf
+
+    - family: 猫啃忘形圆
+      fonts:
+        - asset: assets/fonts/MaoKenWangXingYuan-2.ttf
+
+    - family: 文鼎PL简报宋
+      fonts:
+        - asset: assets/fonts/gbsn00lp-2.ttf
+
+    - family: 文鼎PL细上海宋
+      fonts:
+        - asset: assets/fonts/bsmi00lp-2.ttf
+
+    - family: 小可奶酪体
+      fonts:
+        - asset: assets/fonts/XiaoKeNaiLaoTiShangYongMianFei@QingKeZiTi-2.ttf
+
+    - family: 飞花宋体
+      fonts:
+        - asset: assets/fonts/FeiHuaSongTi-2.ttf
+
+    - family: 三极素纤简体
+      fonts:
+        - asset: assets/fonts/SanJiSuXianJianTi-2.ttf
+

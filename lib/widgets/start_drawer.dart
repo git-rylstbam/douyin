@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../extensions/list_extensions.dart';
 import '../utils/icon_util.dart';
+import 'dismiss_scroll_bar.dart';
 
 /// CreateDate: 2025/2/5 14:57
 /// Author: Lee
@@ -47,14 +48,16 @@ class _BasicFunctionPage extends StatefulWidget {
 
 class _BasicFunctionPageState extends State<_BasicFunctionPage> {
   @override
-  Widget build(BuildContext context) => ListView(
-        children: [
-          _buildHeaderLine(),
-          _buildNotificationLine(),
-          _buildCommonAppletLine(),
-          _buildCommonFunctionLine(),
-        ].mapWithSeparator(
-          (e) => const SizedBox(height: 10.0),
+  Widget build(BuildContext context) => DismissScrollbar(
+        child: ListView(
+          children: [
+            _buildHeaderLine(),
+            _buildNotificationLine(),
+            _buildCommonAppletLine(),
+            _buildCommonFunctionLine(),
+          ].mapWithSeparator(
+            (e) => const SizedBox(height: 10.0),
+          ),
         ),
       );
 
@@ -307,14 +310,16 @@ class _MoreFunctionPage extends StatefulWidget {
 
 class _MoreFunctionPageState extends State<_MoreFunctionPage> {
   @override
-  Widget build(BuildContext context) => ListView(
-        children: [
-          _buildMyPropertyLine(),
-          _buildToolServiceLine(),
-          _buildCreationLine(),
-          _buildEntertainmentLine(),
-        ].mapWithSeparator(
-          (e) => const SizedBox(height: 10.0),
+  Widget build(BuildContext context) => DismissScrollbar(
+        child: ListView(
+          children: [
+            _buildMyPropertyLine(),
+            _buildToolServiceLine(),
+            _buildCreationLine(),
+            _buildEntertainmentLine(),
+          ].mapWithSeparator(
+            (e) => const SizedBox(height: 10.0),
+          ),
         ),
       );
 

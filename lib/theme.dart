@@ -6,13 +6,28 @@ import 'utils/storage_util.dart';
 /// Author: Lee
 /// Description:
 
-const fonts = ['汉仪篆书繁', '思源黑体'];
+const fonts = [
+  '汉仪篆书繁',
+  '思源黑体',
+  '青鸟华光繁仿宋',
+  '鼎猎宋刻体',
+  '鼎猎伙伴体',
+  '周字方体',
+  '鼎猎珠海体',
+  '周字宋体',
+  '猫啃忘形圆',
+  '文鼎PL简报宋',
+  '文鼎PL细上海宋',
+  '小可奶酪体',
+  '飞花宋体',
+  '三极素纤简体',
+];
 
 class ThemeController {
   String? font = StorageUtil.read(StorageKeyEnum.font);
 
   ThemeData get light => ThemeData(
-        fontFamily: font ?? '汉仪篆书繁',
+        fontFamily: font ?? '三极素纤简体',
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
         iconButtonTheme: IconButtonThemeData(
