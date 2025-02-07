@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../extensions/list_extensions.dart';
 import '../../../../../utils/icon_util.dart';
 import '../../../../../widgets/dismiss_scroll_bar.dart';
+import '../../../../setting/widgets/setting_switch.dart';
 import '../../model/model.dart';
 
 /// CreateDate: 2025/2/5 9:54
@@ -18,17 +19,17 @@ class RecommendBottomSheet extends StatefulWidget {
 }
 
 class _RecommendBottomSheetState extends State<RecommendBottomSheet> {
-  final _barrageSwitchNotifier = ValueNotifier<bool>(false);
-  final _backAudioSwitchNotifier = ValueNotifier<bool>(false);
-  final _backWinPlaySwitchNotifier = ValueNotifier<bool>(false);
-  final _autoNextSwitchNotifier = ValueNotifier<bool>(false);
+  final _barrageNotifier = ValueNotifier<bool>(false);
+  final _backAudioNotifier = ValueNotifier<bool>(false);
+  final _backWinPlayNotifier = ValueNotifier<bool>(false);
+  final _autoNextNotifier = ValueNotifier<bool>(false);
 
   @override
   void dispose() {
-    _barrageSwitchNotifier.dispose();
-    _backAudioSwitchNotifier.dispose();
-    _backWinPlaySwitchNotifier.dispose();
-    _autoNextSwitchNotifier.dispose();
+    _barrageNotifier.dispose();
+    _backAudioNotifier.dispose();
+    _backWinPlayNotifier.dispose();
+    _autoNextNotifier.dispose();
     super.dispose();
   }
 
@@ -267,7 +268,7 @@ class _RecommendBottomSheetState extends State<RecommendBottomSheet> {
             _buildSwitchLine(
               title: '弹幕开关',
               icon: CupertinoIcons.drop,
-              notifier: _barrageSwitchNotifier,
+              notifier: _barrageNotifier,
             ),
             _buildNormalOperationLine(
               title: '建群分享',
@@ -284,17 +285,17 @@ class _RecommendBottomSheetState extends State<RecommendBottomSheet> {
             _buildSwitchLine(
               title: '后台播放音频',
               icon: CupertinoIcons.cloud_bolt_rain,
-              notifier: _backAudioSwitchNotifier,
+              notifier: _backAudioNotifier,
             ),
             _buildSwitchLine(
               title: '后台小窗播放',
               icon: CupertinoIcons.arrow_swap,
-              notifier: _backWinPlaySwitchNotifier,
+              notifier: _backWinPlayNotifier,
             ),
             _buildSwitchLine(
               title: '自动连播',
               icon: CupertinoIcons.book,
-              notifier: _autoNextSwitchNotifier,
+              notifier: _autoNextNotifier,
             ),
             _buildNormalOperationLine(
               title: '听抖音',
@@ -390,15 +391,9 @@ class _RecommendBottomSheetState extends State<RecommendBottomSheet> {
         icon: icon,
         trailing: ValueListenableBuilder(
           valueListenable: notifier,
-          builder: (_, value, __) => SizedBox(
-            height: 20.0,
-            child: Transform.scale(
-              scale: .9,
-              child: CupertinoSwitch(
-                value: value,
-                onChanged: (value) => notifier.value = value,
-              ),
-            ),
+          builder: (_, value, __) => SettingSwitch(
+            value: value,
+            onChanged: (value) => notifier.value = value,
           ),
         ),
       );

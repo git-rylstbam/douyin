@@ -27,7 +27,7 @@ class ThemeController {
   String? font = StorageUtil.read(StorageKeyEnum.font);
 
   ThemeData get light => ThemeData(
-        fontFamily: font ?? '三极素纤简体',
+        fontFamily: font ?? '青鸟华光繁仿宋',
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
