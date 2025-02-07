@@ -92,14 +92,20 @@ class _SettingPageState extends State<SettingPage> {
             title: '通用设置',
             onPressed: () => Get.toNamed(Routes.general_setting),
           ),
-          const SettingSectionChild(icon: CupertinoIcons.bell, title: '通知设置'),
-          const SettingSectionChild(
+          SettingSectionChild(
+            icon: CupertinoIcons.bell,
+            title: '通知设置',
+            onPressed: () => Get.toNamed(Routes.notification_setting),
+          ),
+          SettingSectionChild(
             icon: CupertinoIcons.compass,
             title: '通知消息管理',
+            onPressed: () => Get.toNamed(Routes.notification_message),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.chat_bubble,
             title: '聊天设置',
+            onPressed: () => Get.toNamed(Routes.chat_setting),
           ),
           const SettingSectionChild(
             icon: CupertinoIcons.dot_radiowaves_left_right,

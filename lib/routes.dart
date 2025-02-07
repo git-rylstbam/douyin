@@ -4,7 +4,10 @@ import 'pages/font/change_font_page.dart';
 import 'pages/home/home_page.dart';
 import 'pages/home/initial/recommend/recommend_detail_page.dart';
 import 'pages/setting/account_security/account_security_page.dart';
+import 'pages/setting/chat_setting/chat_setting_page.dart';
 import 'pages/setting/general_setting/general_setting_page.dart';
+import 'pages/setting/notification_message/notification_message_page.dart';
+import 'pages/setting/notification_setting/notification_setting_page.dart';
 import 'pages/setting/payment_setting/payment_setting_page.dart';
 import 'pages/setting/privacy_setting/privacy_setting_page.dart';
 import 'pages/setting/setting_page.dart';
@@ -25,6 +28,9 @@ abstract class Routes {
   static const privacy_setting = '/privacy_setting';
   static const payment_setting = '/payment_setting';
   static const general_setting = '/general_setting';
+  static const notification_setting = '/notification_setting';
+  static const notification_message = '/notification_message';
+  static const chat_setting = '/chat_setting';
 
   static final routes = [
     GetPage(name: home, page: () => const HomePage()),
@@ -35,5 +41,14 @@ abstract class Routes {
     GetPage(name: privacy_setting, page: () => const PrivacySettingPage()),
     GetPage(name: payment_setting, page: () => const PaymentSettingPage()),
     GetPage(name: general_setting, page: () => const GeneralSettingPage()),
+    GetPage(
+      name: notification_setting,
+      page: () => const NotificationSettingPage(),
+    ),
+    GetPage(
+      name: notification_message,
+      page: () => const NotificationMessagePage(),
+    ),
+    GetPage(name: chat_setting, page: () => const ChatSettingPage()),
   ];
 }

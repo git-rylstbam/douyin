@@ -65,22 +65,26 @@ class SettingSection extends StatelessWidget {
 class SettingSectionChild extends StatelessWidget {
   const SettingSectionChild({
     super.key,
-    required this.icon,
+    this.icon,
+    this.iconColor,
     required this.title,
     this.right,
     this.bottom,
     this.trailing,
     this.onPressed,
     this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.fontWeight = FontWeight.bold,
   });
 
   final IconData? icon;
+  final Color? iconColor;
   final String? title;
   final Widget? right;
   final Widget? bottom;
   final Widget? trailing;
   final void Function()? onPressed;
   final CrossAxisAlignment crossAxisAlignment;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) => onPressed == null
@@ -102,7 +106,10 @@ class SettingSectionChild extends StatelessWidget {
               crossAxisAlignment: crossAxisAlignment,
               children: [
                 if (icon != null)
-                  Icon(icon, size: 20.0, color: const Color(0xFF161823)),
+                  if (iconColor != null)
+                    _icon
+                  else
+                    Icon(icon, size: 20.0, color: const Color(0xFF161823)),
                 if (title != null)
                   if (bottom == null)
                     _title
@@ -125,10 +132,10 @@ class SettingSectionChild extends StatelessWidget {
 
   Widget get _title => Text(
         title!,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14.0,
-          color: Color(0xFF161823),
-          fontWeight: FontWeight.bold,
+          color: const Color(0xFF161823),
+          fontWeight: fontWeight,
         ),
       );
 
@@ -138,5 +145,11 @@ class SettingSectionChild extends StatelessWidget {
         CupertinoIcons.chevron_right,
         size: 14.0,
         color: Color(0xFF73747B),
+      );
+
+  Widget get _icon => Container(
+        decoration: BoxDecoration(shape: BoxShape.circle, color: iconColor),
+        padding: const EdgeInsets.all(4.0),
+        child: Icon(icon, size: 20.0, color: Colors.white),
       );
 }
