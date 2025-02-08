@@ -107,22 +107,30 @@ class _SettingPageState extends State<SettingPage> {
             title: '聊天设置',
             onPressed: () => Get.toNamed(Routes.chat_setting),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.dot_radiowaves_left_right,
             title: '播放设置',
+            onPressed: () => Get.toNamed(Routes.play_setting),
           ),
-          const SettingSectionChild(icon: CupertinoIcons.ear, title: '背景设置'),
-          const SettingSectionChild(
+          SettingSectionChild(
+            icon: CupertinoIcons.ear,
+            title: '背景设置',
+            onPressed: () => Get.toNamed(Routes.background_setting),
+          ),
+          SettingSectionChild(
             icon: CupertinoIcons.envelope_circle,
             title: '长辈模式',
+            onPressed: () => Get.toNamed(Routes.elder_model),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.textformat,
             title: '字体大小',
+            onPressed: () => Get.toNamed(Routes.font_size),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.rosette,
             title: '极速性能模式',
+            onPressed: () => Get.toNamed(Routes.top_speed_performance_mode),
           ),
           const SettingSectionChild(
             icon: CupertinoIcons.scissors,
@@ -135,35 +143,93 @@ class _SettingPageState extends State<SettingPage> {
         ],
       );
 
-  Widget _buildAboutSection() => const SettingSection(
+  Widget _buildAboutSection() => SettingSection(
         title: '关于',
         children: [
-          SettingSectionChild(icon: CupertinoIcons.slowmo, title: '反馈与帮助'),
+          SettingSectionChild(
+            icon: CupertinoIcons.slowmo,
+            title: '反馈与帮助',
+            onPressed: () => Get.toNamed(
+              Routes.feedback_help,
+              parameters: {'title': '客服中心'},
+            ),
+          ),
           SettingSectionChild(
             icon: CupertinoIcons.slider_horizontal_3,
             title: '了解与管理广告推送',
+            onPressed: () => Get.toNamed(
+              Routes.advertise_push,
+              parameters: {'title': '了解与管理广告推送'},
+            ),
           ),
-          SettingSectionChild(icon: CupertinoIcons.snow, title: '抖音规则中心'),
-          SettingSectionChild(icon: CupertinoIcons.sparkles, title: '资质证照'),
-          SettingSectionChild(icon: CupertinoIcons.waveform, title: '用户协议'),
+          SettingSectionChild(
+            icon: CupertinoIcons.snow,
+            title: '抖音规则中心',
+            onPressed: () => Get.toNamed(
+              Routes.rule_center,
+              parameters: {'title': '规则中心'},
+            ),
+          ),
+          SettingSectionChild(
+            icon: CupertinoIcons.sparkles,
+            title: '资质证照',
+            onPressed: () => Get.toNamed(
+              Routes.qualification_certificate,
+              parameters: {'title': '资质证照'},
+            ),
+          ),
+          SettingSectionChild(
+            icon: CupertinoIcons.waveform,
+            title: '用户协议',
+            onPressed: () => Get.toNamed(
+              Routes.user_agreement,
+              parameters: {'title': '“抖音”用户服务协议'},
+            ),
+          ),
           SettingSectionChild(
             icon: CupertinoIcons.wind_snow,
             title: '隐私政策及简明版',
+            onPressed: () => Get.toNamed(
+              Routes.privacy_policy,
+              parameters: {'title': '“抖音”隐私政策简明版'},
+            ),
           ),
           SettingSectionChild(
             icon: CupertinoIcons.thermometer_snowflake,
             title: '应用权限',
+            onPressed: () => Get.toNamed(
+              Routes.application_authority,
+              parameters: {'title': '抖音权限申请与使用情况说明'},
+            ),
           ),
-          SettingSectionChild(icon: CupertinoIcons.umbrella, title: '个人信息收集清单'),
+          SettingSectionChild(
+            icon: CupertinoIcons.umbrella,
+            title: '个人信息收集清单',
+            onPressed: () => Get.toNamed(
+              Routes.personal_info_list,
+              parameters: {'title': '个人信息收集清单'},
+            ),
+          ),
           SettingSectionChild(
             icon: CupertinoIcons.scissors_alt,
             title: '第三方信息共享清单',
+            onPressed: () => Get.toNamed(
+              Routes.third_info_list,
+              parameters: {'title': '【抖音】第三方信息共享清单'},
+            ),
           ),
           SettingSectionChild(
             icon: CupertinoIcons.qrcode_viewfinder,
             title: '个人信息管理',
           ),
-          SettingSectionChild(icon: CupertinoIcons.pencil, title: '开源软件声明'),
+          SettingSectionChild(
+            icon: CupertinoIcons.pencil,
+            title: '开源软件声明',
+            onPressed: () => Get.toNamed(
+              Routes.open_source_statement,
+              parameters: {'title': '开源软件声明'},
+            ),
+          ),
           SettingSectionChild(icon: CupertinoIcons.helm, title: '关于抖音'),
         ],
       );

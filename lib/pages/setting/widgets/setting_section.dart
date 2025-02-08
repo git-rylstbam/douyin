@@ -94,6 +94,24 @@ class SettingSectionChild extends StatelessWidget {
           child: _buildSection(),
         );
 
+  /// 这里如果用 Padding 或者 Container(不指定颜色)，则 Container 里的空白处无法响应点击事件；
+  /// 如果用 Container(指定颜色，即使是 transparent)，则空白处可以响应点击事件。
+  /// 原因: Flutter 事件处理机制中的 HitTestBehavior 以及 Widget 的背景绘制行为导致的。
+  /// Flutter 需要一个“实心”或者“非空”的组件来捕捉手势。如果一个 Widget 没有绘制任何内容，它就会被
+  /// 认为是“不可点击的”，触摸事件会穿透它，传递到它下面的 Widget。
+  /// 当 Container 具有 color(即使是 Colors.transparent)，Flutter 依然认为它是有绘制内容的，所以它能响
+  /// 应点击事件。
+  /// `Container 确实在 UI 中存在（即使透明）。
+  /// `由于 color 被赋值，Flutter 认为它是“有东西的”，所以它能够接收手势事件。
+  /// 当 Container 没有指定 color 时，它会被视为“无内容”，Flutter 在渲染时会优化掉这个 Container，使其
+  /// 变成无形的包装器，类似于 Column、Row，不会拦截事件。
+  /// `Container 变成了一个“空壳”，不会拦截事件，点击事件会穿透它直接传递给下面的组件。
+  /// `Padding 只是调整布局的组件，不会绘制任何东西，因此点击事件直接穿透到子组件或其父组件。
+  /// 解决方案:
+  /// 如果你希望在整个区域(包括空白部分)都能被点击，可以使用:
+  /// 1. 使用 Container(color: Colors.transparent)
+  /// 2. 使用 InkWell 并设置 behavior: HitTestBehavior.translucent
+  /// 3. 使用 GestureDetector 并设置 behavior: HitTestBehavior.translucent
   Widget _buildSection() => Container(
         color: Colors.transparent,
         padding: const EdgeInsets.all(20.0),

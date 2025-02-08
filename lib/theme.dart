@@ -6,6 +6,8 @@ import 'utils/storage_util.dart';
 /// Author: Lee
 /// Description:
 
+const kDefaultFont = '青鸟华光繁仿宋';
+
 const fonts = [
   '汉仪篆书繁',
   '思源黑体',
@@ -24,10 +26,10 @@ const fonts = [
 ];
 
 class ThemeController {
-  String? font = StorageUtil.read(StorageKeyEnum.font);
+  String? font = StorageUtil.read(StorageKeyEnum.font) ?? kDefaultFont;
 
   ThemeData get light => ThemeData(
-        fontFamily: font ?? '青鸟华光繁仿宋',
+        fontFamily: font ?? kDefaultFont,
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
@@ -39,6 +41,18 @@ class ThemeController {
             surfaceTintColor: Colors.transparent,
             overlayColor: Colors.transparent,
           ),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.selected)) {
+              return const Color(0xFFFC2958);
+            }
+            return Colors.transparent;
+          }),
+          checkColor: WidgetStateProperty.all(Colors.white),
+          side: const BorderSide(color: Color(0xFFC8C9CB)),
+          shape: const CircleBorder(),
+          splashRadius: .0,
         ),
       );
 }

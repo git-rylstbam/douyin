@@ -10,6 +10,7 @@ import 'theme.dart';
 import 'utils/storage_util.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init(StorageUtil.defaultKey);
   runApp(const MyApp());
 }
