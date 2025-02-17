@@ -12,7 +12,16 @@ import 'utils/storage_util.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init(StorageUtil.defaultKey);
-  runApp(const MyApp());
+  runApp(
+    Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 460.0,
+        ),
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import '../../../extensions/list_extensions.dart';
+import '../../../routes.dart';
+import '../../../utils/toast_util.dart';
 import '../../../widgets/dismiss_scroll_bar.dart';
 import '../widgets/setting_section.dart';
 import '../widgets/setting_switch.dart';
@@ -52,22 +56,28 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
   Widget _buildAccountManageSection() => SettingSection(
         title: '账号管理',
         children: [
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: Icons.multiple_stop,
             title: '切换账号',
-            right: Text('林落凝', style: kSettingSectionChildRightStyle),
+            right: const Text('林落凝', style: kSettingSectionChildRightStyle),
+            onPressed: () => Get.toNamed(Routes.change_account),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.pencil,
             title: '抖音号',
-            trailing: Text(
+            trailing: const Text(
               'HGS.rylstbam.Lln',
               style: TextStyle(fontSize: 14.0, color: Color(0xFF8A8B90)),
             ),
+            onPressed: () {
+              Clipboard.setData(const ClipboardData(text: 'HGS.rylstbam.Lln'));
+              ToastUtil.showToast(context, '复制成功');
+            },
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.qrcode,
             title: '我的抖音码',
+            onPressed: () => Get.toNamed(Routes.my_douyin_code),
           ),
           const SettingSectionChild(
             icon: CupertinoIcons.device_phone_portrait,

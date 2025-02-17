@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 import 'pages/font/change_font_page.dart';
 import 'pages/home/home_page.dart';
 import 'pages/home/initial/recommend/recommend_detail_page.dart';
+import 'pages/setting/about_douyin/about_douyin_page.dart';
 import 'pages/setting/account_security/account_security_page.dart';
+import 'pages/setting/account_security/my_douyin_code/my_douyin_code_page.dart';
 import 'pages/setting/background_setting/background_setting_page.dart';
+import 'pages/setting/change_account/change_account_page.dart';
 import 'pages/setting/chat_setting/chat_setting_page.dart';
 import 'pages/setting/elder_model/elder_model_page.dart';
 import 'pages/setting/font_size/font_size_page.dart';
@@ -31,7 +34,11 @@ abstract class Routes {
   static const recommend_detail = '/recommend_detail';
 
   static const setting = '/setting';
+
   static const account_security = '/account_security';
+  static const change_account = '/change_acount';
+  static const my_douyin_code = '/my_douyin_code';
+
   static const privacy_setting = '/privacy_setting';
   static const payment_setting = '/payment_setting';
   static const general_setting = '/general_setting';
@@ -54,6 +61,7 @@ abstract class Routes {
   static const third_info_list = '/third_info_list';
   static const personal_info_manage = '/personal_info_manage';
   static const open_source_statement = '/open_source_statement';
+  static const about_douyin = '/about_douyin';
 
   static final routes = [
     GetPage(name: home, page: () => const HomePage()),
@@ -84,49 +92,27 @@ abstract class Routes {
       name: top_speed_performance_mode,
       page: () => const TopSpeedPerformanceModePage(),
     ),
-    GetPage(
-      name: feedback_help,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: advertise_push,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: rule_center,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: qualification_certificate,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: user_agreement,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: privacy_policy,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: application_authority,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: personal_info_list,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
-    GetPage(
-      name: third_info_list,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
+    _forWeb(feedback_help),
+    _forWeb(advertise_push),
+    _forWeb(rule_center),
+    _forWeb(qualification_certificate),
+    _forWeb(user_agreement),
+    _forWeb(privacy_policy),
+    _forWeb(application_authority),
+    _forWeb(personal_info_list),
+    _forWeb(third_info_list),
     GetPage(
       name: personal_info_manage,
       page: () => const PersonalInfoManagePage(),
     ),
-    GetPage(
-      name: open_source_statement,
-      page: () => CommonWebPage(title: Get.parameters['title']!),
-    ),
+    _forWeb(open_source_statement),
+    GetPage(name: about_douyin, page: () => const AboutDouyinPage()),
+    GetPage(name: change_account, page: () => const ChangeAccountPage()),
+    GetPage(name: my_douyin_code, page: () => const MyDouyinCodePage()),
   ];
+
+  static GetPage _forWeb(String name) => GetPage(
+        name: name,
+        page: () => CommonWebPage(title: Get.parameters['title']!),
+      );
 }

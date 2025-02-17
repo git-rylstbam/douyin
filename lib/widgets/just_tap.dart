@@ -13,6 +13,10 @@ class JustTap extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: GestureDetector(onTap: onPressed, child: child),
+        child: GestureDetector(
+          onTap: onPressed,
+          behavior: HitTestBehavior.translucent,
+          child: child,
+        ),
       );
 }

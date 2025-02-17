@@ -10,19 +10,21 @@ class SettingTopBar extends AppBar {
   SettingTopBar({
     super.key,
     String? title,
+    Color leadingColor = Colors.black,
+    Color titleColor = const Color(0xFF161823),
     bool super.centerTitle = true,
     Color super.backgroundColor = Colors.transparent,
     super.actions,
   }) : super(
           leading: IconButton(
             onPressed: Get.back,
-            icon: const Icon(CupertinoIcons.chevron_left),
+            icon: Icon(CupertinoIcons.chevron_left, color: leadingColor),
           ),
           title: Text(
             title ?? '',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14.0,
-              color: Color(0xFF161823),
+              color: titleColor,
               fontWeight: FontWeight.bold,
             ),
           ),

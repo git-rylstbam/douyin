@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../extensions/list_extensions.dart';
 import '../../routes.dart';
 import '../../widgets/dismiss_scroll_bar.dart';
+import 'logout/logout_dialog.dart';
 import 'widgets/setting_section.dart';
 import 'widgets/setting_topbar.dart';
 
@@ -221,6 +222,7 @@ class _SettingPageState extends State<SettingPage> {
           SettingSectionChild(
             icon: CupertinoIcons.qrcode_viewfinder,
             title: '个人信息管理',
+            onPressed: () => Get.toNamed(Routes.personal_info_manage),
           ),
           SettingSectionChild(
             icon: CupertinoIcons.pencil,
@@ -230,17 +232,29 @@ class _SettingPageState extends State<SettingPage> {
               parameters: {'title': '开源软件声明'},
             ),
           ),
-          SettingSectionChild(icon: CupertinoIcons.helm, title: '关于抖音'),
+          SettingSectionChild(
+            icon: CupertinoIcons.helm,
+            title: '关于抖音',
+            onPressed: () => Get.toNamed(Routes.about_douyin),
+          ),
         ],
       );
 
-  Widget _buildLogoutSection() => const SettingSection(
+  Widget _buildLogoutSection() => SettingSection(
         children: [
-          SettingSectionChild(icon: Icons.multiple_stop, title: '切换账号'),
+          SettingSectionChild(
+            icon: Icons.multiple_stop,
+            title: '切换账号',
+            onPressed: () => Get.toNamed(Routes.change_account),
+          ),
           SettingSectionChild(
             icon: CupertinoIcons.power,
             title: '退出登录',
-            trailing: SizedBox.shrink(),
+            trailing: const SizedBox.shrink(),
+            onPressed: () => showCupertinoDialog(
+              context: context,
+              builder: (_) => const LogoutDialog(),
+            ),
           ),
         ],
       );
