@@ -10,6 +10,7 @@ import '../../../widgets/dismiss_scroll_bar.dart';
 import '../widgets/setting_section.dart';
 import '../widgets/setting_switch.dart';
 import '../widgets/setting_topbar.dart';
+import 'phone_binding/phone_binding_dialog.dart';
 
 /// CreateDate: 2025/2/7 11:18
 /// Author: Lee
@@ -79,19 +80,28 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
             title: '我的抖音码',
             onPressed: () => Get.toNamed(Routes.my_douyin_code),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.device_phone_portrait,
             title: '手机号绑定',
-            right: Text('159******28', style: kSettingSectionChildRightStyle),
+            right: const Text(
+              '159******28',
+              style: kSettingSectionChildRightStyle,
+            ),
+            onPressed: () => showCupertinoDialog(
+              context: context,
+              builder: (_) => const PhoneBindingDialog(),
+            ),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.paw,
             title: '抖音密码',
-            right: Text('未设置', style: kSettingSectionChildRightStyle),
+            right: const Text('未设置', style: kSettingSectionChildRightStyle),
+            onPressed: () => ToastUtil.showToast(context, '待定'),
           ),
-          const SettingSectionChild(
+          SettingSectionChild(
             icon: CupertinoIcons.map_pin_ellipse,
             title: '登录设备管理',
+            onPressed: () => Get.toNamed(Routes.login_device),
           ),
           SettingSectionChild(
             icon: CupertinoIcons.money_yen_circle,
@@ -107,12 +117,19 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
         ],
       );
 
-  Widget _buildBindingAuthSection() => const SettingSection(
+  Widget _buildBindingAuthSection() => SettingSection(
         title: '绑定与授权',
         children: [
-          SettingSectionChild(icon: CupertinoIcons.dial, title: '第三方账号绑定'),
-          SettingSectionChild(icon: CupertinoIcons.alarm, title: '授权管理'),
-          SettingSectionChild(icon: CupertinoIcons.app_badge, title: '我的合作码'),
+          SettingSectionChild(
+            icon: CupertinoIcons.dial,
+            title: '第三方账号绑定',
+            onPressed: () => Get.toNamed(Routes.third_account_binding),
+          ),
+          const SettingSectionChild(icon: CupertinoIcons.alarm, title: '授权管理'),
+          const SettingSectionChild(
+            icon: CupertinoIcons.app_badge,
+            title: '我的合作码',
+          ),
         ],
       );
 

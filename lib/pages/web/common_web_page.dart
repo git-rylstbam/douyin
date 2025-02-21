@@ -7,6 +7,8 @@ import '../setting/widgets/setting_topbar.dart';
 /// Author: Lee
 /// Description:
 
+const kCommonUrl = 'https://flutter.dev';
+
 class CommonWebPage extends StatefulWidget {
   const CommonWebPage({super.key, required this.title});
 
@@ -22,8 +24,7 @@ class _CommonWebPageState extends State<CommonWebPage> {
   @override
   void initState() {
     super.initState();
-    _controller = WebViewController()
-      ..loadRequest(Uri.parse('https://flutter.dev'));
+    _controller = WebViewController()..loadRequest(Uri.parse(kCommonUrl));
   }
 
   @override

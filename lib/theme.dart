@@ -6,7 +6,8 @@ import 'utils/storage_util.dart';
 /// Author: Lee
 /// Description:
 
-const kDefaultFont = '青鸟华光繁仿宋';
+const kZhDefaultFont = '青鸟华光繁仿宋';
+const kEnDefaultFont = 'NoteScript-SemiBold';
 
 const fonts = [
   '汉仪篆书繁',
@@ -26,10 +27,11 @@ const fonts = [
 ];
 
 class ThemeController {
-  String? font = StorageUtil.read(StorageKeyEnum.font) ?? kDefaultFont;
+  String? font = StorageUtil.read(StorageKeyEnum.font) ?? kZhDefaultFont;
 
   ThemeData get light => ThemeData(
-        fontFamily: font ?? kDefaultFont,
+        fontFamily: kEnDefaultFont,
+        fontFamilyFallback: [font ?? kZhDefaultFont],
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,

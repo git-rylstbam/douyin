@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 /// Description:
 
 class ToastUtil {
+  static bool _isToastVisible = false;
+
   static void showToast(BuildContext context, String message) {
+    if (_isToastVisible) return;
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
       builder: (context) => Center(
@@ -30,6 +33,10 @@ class ToastUtil {
       ),
     );
     overlay.insert(overlayEntry);
-    Future.delayed(const Duration(seconds: 2), () => overlayEntry.remove());
+    _isToastVisible = true;
+    Future.delayed(const Duration(seconds: 2), () {
+      overlayEntry.remove();
+      _isToastVisible = false;
+    });
   }
 }

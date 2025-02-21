@@ -142,7 +142,7 @@ class _MyDouyinCodePageState extends State<MyDouyinCodePage> {
               fontSize: 12.0,
               color: Color(0xFFF2F7F5),
             ),
-          )
+          ),
         ],
       );
 }

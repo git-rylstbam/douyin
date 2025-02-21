@@ -128,7 +128,7 @@ class _IndividualPageState extends State<IndividualPage>
                 4 => const CollectPage(),
                 5 => const LikePage(),
                 _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
-                },
+              },
             ),
           ],
         ),

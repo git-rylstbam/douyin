@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// CreateDate: 2025/2/6 10:26
 /// Author: Lee
@@ -13,6 +14,13 @@ class NoBorderTextField extends StatelessWidget {
     this.hintSize = 14.0,
     this.labelColor = Colors.black,
     this.hintColor = Colors.grey,
+    this.inputFormatters,
+    this.onChanged,
+    this.cursorWidth = 2.0,
+    this.cursorHeight,
+    this.cursorRadius,
+    this.cursorOpacityAnimates,
+    this.cursorColor,
   });
 
   final TextEditingController controller;
@@ -21,11 +29,25 @@ class NoBorderTextField extends StatelessWidget {
   final double hintSize;
   final Color labelColor;
   final Color hintColor;
+  final List<TextInputFormatter>? inputFormatters;
+  final ValueChanged<String>? onChanged;
+  final double cursorWidth;
+  final double? cursorHeight;
+  final Radius? cursorRadius;
+  final bool? cursorOpacityAnimates;
+  final Color? cursorColor;
 
   @override
   Widget build(BuildContext context) => TextField(
         controller: controller,
         textAlignVertical: TextAlignVertical.top,
+        inputFormatters: inputFormatters,
+        onChanged: onChanged,
+        cursorWidth: cursorWidth,
+        cursorHeight: cursorHeight,
+        cursorRadius: cursorRadius,
+        cursorOpacityAnimates: cursorOpacityAnimates,
+        cursorColor: cursorColor,
         decoration: InputDecoration(
           labelStyle: TextStyle(fontSize: labelSize, color: labelColor),
           hintText: hint,

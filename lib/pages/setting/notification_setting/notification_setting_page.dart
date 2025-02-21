@@ -104,17 +104,23 @@ class _NotificationSettingPageState extends State<NotificationSettingPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Row(
-            spacing: 5.0,
-            children: [
-              _buildHeaderChild(CupertinoIcons.person_2_fill, '全部'),
-              _buildHeaderChild(CupertinoIcons.person_badge_plus_fill, '来自关注'),
-              _buildHeaderChild(
-                CupertinoIcons.person_crop_circle_fill_badge_checkmark,
-                '来自互关',
-              ),
-              _buildHeaderChild(CupertinoIcons.bell_slash_fill, '不接收'),
-            ],
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 5.0,
+              children: [
+                _buildHeaderChild(CupertinoIcons.person_2_fill, '全部'),
+                _buildHeaderChild(
+                  CupertinoIcons.person_badge_plus_fill,
+                  '来自关注',
+                ),
+                _buildHeaderChild(
+                  CupertinoIcons.person_crop_circle_fill_badge_checkmark,
+                  '来自互关',
+                ),
+                _buildHeaderChild(CupertinoIcons.bell_slash_fill, '不接收'),
+              ],
+            ),
           ),
         ],
       );
@@ -138,6 +144,7 @@ class _NotificationSettingPageState extends State<NotificationSettingPage> {
                   color: Color(0xFF161823),
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

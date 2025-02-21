@@ -96,3 +96,19 @@ flutter:
       fonts:
         - asset: assets/fonts/SanJiSuXianJianTi-2.ttf
 
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto.ttf
+
+    - family: Crystal
+      fonts:
+        - asset: assets/fonts/Crystal-Regular-2.ttf
+
+    - family: NoteScript-Regular
+      fonts:
+        - asset: assets/fonts/Note-Script-Regular-2.ttf
+
+    - family: NoteScript-SemiBold
+      fonts:
+        - asset: assets/fonts//Note-Script-SemiBold-2.ttf
+

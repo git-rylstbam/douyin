@@ -5,7 +5,11 @@ import 'pages/home/home_page.dart';
 import 'pages/home/initial/recommend/recommend_detail_page.dart';
 import 'pages/setting/about_douyin/about_douyin_page.dart';
 import 'pages/setting/account_security/account_security_page.dart';
+import 'pages/setting/account_security/login_device/login_device_page.dart';
 import 'pages/setting/account_security/my_douyin_code/my_douyin_code_page.dart';
+import 'pages/setting/account_security/phone_binding/input_sms_code_page.dart';
+import 'pages/setting/account_security/phone_binding/phone_binding_page.dart';
+import 'pages/setting/account_security/third_account_binding/third_account_binding_page.dart';
 import 'pages/setting/background_setting/background_setting_page.dart';
 import 'pages/setting/change_account/change_account_page.dart';
 import 'pages/setting/chat_setting/chat_setting_page.dart';
@@ -38,6 +42,10 @@ abstract class Routes {
   static const account_security = '/account_security';
   static const change_account = '/change_acount';
   static const my_douyin_code = '/my_douyin_code';
+  static const phone_binding = '/phone_binding';
+  static const input_sms_code = '/input_sms_code';
+  static const login_device = '/login_device';
+  static const third_account_binding = '/third_account_binding';
 
   static const privacy_setting = '/privacy_setting';
   static const payment_setting = '/payment_setting';
@@ -69,6 +77,20 @@ abstract class Routes {
     GetPage(name: recommend_detail, page: () => const RecommendDetailPage()),
     GetPage(name: setting, page: () => const SettingPage()),
     GetPage(name: account_security, page: () => const AccountSecurityPage()),
+    GetPage(name: change_account, page: () => const ChangeAccountPage()),
+    GetPage(name: my_douyin_code, page: () => const MyDouyinCodePage()),
+    GetPage(name: phone_binding, page: () => const PhoneBindingPage()),
+    GetPage(
+      name: input_sms_code,
+      page: () => InputSmsCodePage(
+        phone: Get.parameters['phone']!,
+      ),
+    ),
+    GetPage(name: login_device, page: () => const LoginDevicePage()),
+    GetPage(
+      name: third_account_binding,
+      page: () => const ThirdAccountBindingPage(),
+    ),
     GetPage(name: privacy_setting, page: () => const PrivacySettingPage()),
     GetPage(name: payment_setting, page: () => const PaymentSettingPage()),
     GetPage(name: general_setting, page: () => const GeneralSettingPage()),
@@ -107,8 +129,6 @@ abstract class Routes {
     ),
     _forWeb(open_source_statement),
     GetPage(name: about_douyin, page: () => const AboutDouyinPage()),
-    GetPage(name: change_account, page: () => const ChangeAccountPage()),
-    GetPage(name: my_douyin_code, page: () => const MyDouyinCodePage()),
   ];
 
   static GetPage _forWeb(String name) => GetPage(
