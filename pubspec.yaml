@@ -110,5 +110,25 @@ flutter:
 
     - family: NoteScript-SemiBold
       fonts:
-        - asset: assets/fonts//Note-Script-SemiBold-2.ttf
+        - asset: assets/fonts/Note-Script-SemiBold-2.ttf
+
+    - family: NoteScript-Bold
+      fonts:
+        - asset: assets/fonts/Note-Script-Bold-2.ttf
+
+    - family: NoteScript-ExtraBold
+      fonts:
+        - asset: assets/fonts/Note-Script-ExtraBold-2.ttf
+
+    - family: NoteScript-Light
+      fonts:
+        - asset: assets/fonts/Note-Script-Light-2.ttf
+
+    - family: NoteScript-Medium
+      fonts:
+        - asset: assets/fonts/Note-Script-Medium-2.ttf
+
+    - family: Balymond
+      fonts:
+        - asset: assets/fonts/Balymond-2.ttf
 
